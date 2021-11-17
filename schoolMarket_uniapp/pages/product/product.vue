@@ -78,21 +78,18 @@
 
 		<!-- 底部操作菜单 -->
 		<view class="page-bottom">
-			<navigator url="/pages/index/index" open-type="switchTab" class="p-b-btn">
-				<text class="yticon icon-xiatubiao--copy"></text>
-				<text>返回首页</text>
-			</navigator>
-			<!-- 			<navigator url="/pages/cart/cart" open-type="switchTab" class="p-b-btn">
-				<text class="yticon icon-gouwuche"></text>
-				<text>购物车</text> -->
-			</navigator>
-			<view class="p-b-btn" :class="{active: favorite}" @click="toFavorite">
-				<text class="yticon icon-shoucang"></text>
-				<text>加入心愿单</text>
-			</view>
-
+			<!-- <view class="p-b-btn"> -->
+				<navigator url="/pages/index/index" open-type="switchTab" class="p-b-btn">
+					<text class="yticon icon-xiatubiao--copy"></text>
+					<text>返回首页</text>
+				</navigator>
+				<view class="p-b-btn" :class="{active: favorite}" @click="toFavorite">
+					<text class="yticon icon-shoucang"></text>
+					<text>加入心愿单</text>
+				</view>
+			<!-- </view> -->
 			<view class="action-btn-group">
-				<button type="primary" class=" action-btn no-border buy-now-btn">聊一聊</button>
+				<!-- <button type="primary" class=" action-btn no-border buy-now-btn">聊一聊</button> -->
 				<button type="primary" class=" action-btn no-border add-cart-btn" @click="buy">我想要</button>
 			</view>
 		</view>
@@ -903,7 +900,7 @@
 		bottom: 30upx;
 		z-index: 95;
 		display: flex;
-		justify-content: center;
+		justify-content: space-between;
 		align-items: center;
 		width: 690upx;
 		height: 100upx;
@@ -950,7 +947,7 @@
 			box-shadow: 0 20upx 40upx -16upx #fa436a;
 			box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
 			background: linear-gradient(to right, #ffac30, #fa436a, #F56C6C);
-			margin-left: 20upx;
+			margin-right: 20upx;
 			position: relative;
 
 			&:after {
@@ -971,6 +968,7 @@
 				width: 180upx;
 				height: 100%;
 				font-size: $font-base;
+				
 				padding: 0;
 				border-radius: 0;
 				background: transparent;
