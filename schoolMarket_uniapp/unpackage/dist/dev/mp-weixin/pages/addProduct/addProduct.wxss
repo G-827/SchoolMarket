@@ -1,0 +1,211 @@
+@charset "UTF-8";
+/* 页面左右间距 */
+/* 文字尺寸 */
+/*文字颜色*/
+/* 边框颜色 */
+/* 图片加载中颜色 */
+/* 行为相关颜色 */
+page {
+  background: #f8f8f8;
+}
+.c-list {
+  font-size: 26rpx;
+  color: #606266;
+  background: #f8f8f8;
+}
+.c-list .imagePart {
+  background: #ffffff;
+  height: 500rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-align-content: center;
+          align-content: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.c-list .imagePart .image-def {
+  width: 86rpx;
+  height: 86rpx;
+}
+.c-list .c-row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  margin: 10rpx;
+  padding: 20rpx 30rpx;
+  position: relative;
+}
+.c-list .tit {
+  width: 140rpx;
+}
+.c-list .mid {
+  text-align: center;
+}
+.c-list .con {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  color: #606266;
+}
+.c-list .con .selected-text {
+  margin-right: 10rpx;
+}
+.c-list .bz-list {
+  height: 40rpx;
+  font-size: 26rpx;
+  color: #303133;
+}
+.c-list .bz-list text {
+  display: inline-block;
+  margin-right: 30rpx;
+}
+.c-list .bz-list textarea {
+  height: 300rpx;
+  width: 530rpx;
+}
+.c-list .con-list {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  color: #303133;
+  line-height: 40rpx;
+}
+.c-list .red {
+  color: #fa436a;
+}
+.productPart {
+  position: relative;
+  margin-top: 20rpx;
+  background: #fff;
+  padding-bottom: 1px;
+  height: 400rpx;
+}
+.yt-list {
+  margin-top: 16rpx;
+  background: #f8f8f8;
+  padding-bottom: 300rpx;
+}
+.yt-list-cell {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  background: #ffffff;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  margin: 10rpx 0rpx;
+  padding: 10rpx 30rpx 10rpx 40rpx;
+  line-height: 70rpx;
+  position: relative;
+}
+.yt-list-cell.cell-hover {
+  background: #fafafa;
+}
+.yt-list-cell.b-b:after {
+  left: 30rpx;
+}
+.yt-list-cell .cell-icon {
+  height: 32rpx;
+  width: 32rpx;
+  font-size: 22rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 32rpx;
+  background: #f85e52;
+  border-radius: 4rpx;
+  margin-right: 12rpx;
+}
+.yt-list-cell .cell-icon.hb {
+  background: #ffaa0e;
+}
+.yt-list-cell .cell-icon.lpk {
+  background: #3ab54a;
+}
+.yt-list-cell .cell-icon .red {
+  color: #fa436a;
+}
+.yt-list-cell .cell-more {
+  -webkit-align-self: center;
+          align-self: center;
+  font-size: 24rpx;
+  color: #909399;
+  margin-left: 8rpx;
+  margin-right: -10rpx;
+}
+.yt-list-cell .cell-tit {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  font-size: 26rpx;
+  color: #909399;
+  margin-right: 10rpx;
+}
+.yt-list-cell .cell-tip {
+  font-size: 26rpx;
+  color: #303133;
+  right: 0;
+}
+.yt-list-cell .cell-tip.disabled {
+  color: #909399;
+}
+.yt-list-cell .cell-tip.active {
+  color: #fa436a;
+}
+.yt-list-cell .cell-tip.red {
+  color: #fa436a;
+}
+.yt-list-cell .cell-tip input {
+  text-align: right;
+}
+.yt-list-cell.desc-cell .cell-tit {
+  max-width: 90rpx;
+}
+.yt-list-cell .desc {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  font-size: 28rpx;
+  color: #303133;
+}
+.subPart {
+  position: fixed;
+  bottom: 110rpx;
+  left: 0;
+  right: 0;
+  padding: 30rpx 40rpx;
+}
+.subPart .subBtn {
+  background: -webkit-linear-gradient(left, #ffac30, #fa436a, #ffac30);
+  background: linear-gradient(to right, #ffac30, #fa436a, #ffac30);
+  border-radius: 100px;
+  font-size: 25rpx;
+  font-weight: bold;
+  color: #ffffff;
+  box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
+}
+.subPart .subBtnPrs {
+  background: #ea3e63;
+  top: 3rpx;
+  left: 3rpx;
+  box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
+}
+
