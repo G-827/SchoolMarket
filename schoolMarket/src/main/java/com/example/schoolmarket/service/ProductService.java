@@ -12,6 +12,7 @@ public interface ProductService {
     List<Product> GetAllProduct();
     Product GetProductById(Integer id);
     List<Product> GetProductByUserId(Integer id);
+    List<Product> GetProductByType(String type);
     String AddProduct(Product product);
     String DeleteProductById(Integer id);
     String UpdateProduct(Product product);

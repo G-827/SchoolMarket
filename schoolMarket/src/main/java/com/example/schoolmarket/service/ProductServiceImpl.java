@@ -67,6 +67,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> GetProductByType(String type) {
+        try {
+            return productDao.GetProductByType(type);
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+    }
+
+    @Override
     public String AddProduct(Product product) {
         try {
 

@@ -20,6 +20,9 @@ public interface ProductDao {
     @Select("SELECT * FROM product WHERE owner_id = #{id} ")
     List<Product> GetProductByUserId(Integer id);
 
+    @Select("SELECT * FROM product WHERE type = #{type}")
+    List<Product> GetProductByType(String type);
+
     @Insert("INSERT into product(productname,price,type,detail,img_url,owner_id,owner_name,datetime) values(#{productname},#{price},#{type},#{detail},#{img_url},#{owner_id},#{owner_name},#{datetime})")
     int AddProduct(Product product);
 
