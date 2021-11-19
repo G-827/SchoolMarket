@@ -11,16 +11,12 @@ const userInfo = {
 }
 /* 首页轮播图 */
 const carouselList = [{
-		src: "/static/temp/top-1.jpg",		
+		src: "/static/temp/top3.jpg",		
+	},{
+		src: "/static/temp/top2.jpg",		
 	},
 	{
-		src: "/static/temp/top-2.jpg",		
-	},
-	{
-		src: "/static/temp/top-3.jpg",		
-	},
-	{
-		src: "/static/temp/top-4.jpg",		
+		src: "/static/temp/top1.jpg",		
 	}
 ]
 /* 商品列表 */

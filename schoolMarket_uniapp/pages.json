@@ -67,7 +67,12 @@
 		{
 			"path": "pages/userinfo/userinfo",
 			"style": {
-				"navigationBarTitleText": "卖家资料"
+				"navigationBarTitleText": "用户资料"
+			}
+		}, {
+			"path": "pages/myinfo/myinfo",
+			"style": {
+				"navigationBarTitleText": "个人资料"
 			}
 		}, {
 			"path": "pages/cart/cart",
@@ -226,12 +231,12 @@
 				"selectedIconPath": "static/add.png",
 				"text": "发布"
 			},
-			{
-				"pagePath": "pages/cart/cart",
-				"iconPath": "static/tab-cart.png",
-				"selectedIconPath": "static/tab-cart-current.png",
-				"text": "购物车"
-			},
+			// {
+			// 	"pagePath": "pages/cart/cart",
+			// 	"iconPath": "static/tab-cart.png",
+			// 	"selectedIconPath": "static/tab-cart-current.png",
+			// 	"text": "购物车"
+			// },
 			{
 				"pagePath": "pages/user/user",
 				"iconPath": "static/tab-my.png",

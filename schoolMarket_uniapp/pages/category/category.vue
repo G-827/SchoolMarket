@@ -84,9 +84,11 @@
 				this.sizeCalcState = true;
 			},
 			navToList(sid, tid){
+				console.log(sid,tid);
 				uni.navigateTo({
 					url: `/pages/product/list?fid=${this.currentId}&sid=${sid}&tid=${tid}`
 				})
+				
 			}
 		}
 	}

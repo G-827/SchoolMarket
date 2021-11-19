@@ -2,7 +2,6 @@ import Vue from 'vue'
 import store from './store'
 import App from './App'
 import Request from './js_sdk/pocky-request/pocky-request v.2.0.4/index.js'
-
 import Json from './Json' //测试用数据
 /**
  *  因工具函数属于公司资产, 所以直接在Vue实例挂载几个常用的函数

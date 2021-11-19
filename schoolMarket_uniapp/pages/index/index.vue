@@ -12,39 +12,38 @@
 			<!-- 标题栏和状态栏占位符 -->
 			<view class="titleNview-placing"></view>
 			<!-- 背景色区域 -->
-			<view class="titleNview-background" style="{backgroundColor:#02347B}"></view>
-			<swiper class="carousel" circular @change="swiperChange">
-				<swiper-item v-for="(item, index) in carouselList" :key="index" class="carousel-item"
-					@click="navToDetailPage({title: '轮播广告'})">
+			<view class="titleNview-background" style="{backgroundColor:#ebeb00}"></view>
+			<swiper class="carousel" circular autoplay="true" delay="1000">
+				<swiper-item v-for="(item, index) in carouselList" :key="index" class="carousel-item">
 					<image :src="item.src" />
 				</swiper-item>
 			</swiper>
 			<!-- 自定义swiper指示器 -->
-			<view class="swiper-dots">
+			<!-- <view class="swiper-dots">
 				<text class="num">{{swiperCurrent+1}}</text>
 				<text class="sign">/</text>
 				<text class="num">{{swiperLength}}</text>
-			</view>
+			</view> -->
 		</view>
 		<!-- 分类 -->
 		<view class="cate-section">
-			<view class="cate-item">
+			<view @click="navToList(5, 8)" class="cate-item">
 				<image src="/static/temp/book_icon.png"></image>
 				<text>书籍教材</text>
 			</view>
-			<view class="cate-item">
+			<view @click="navToList(6, 14)" class="cate-item">
 				<image src="/static/temp/bus_icon.png"></image>
 				<text>交通工具</text>
 			</view>
-			<view class="cate-item">
+			<view @click="navToList(26, 29)" class="cate-item">
 				<image src="/static/temp/c6.png"></image>
 				<text>服装鞋帽</text>
 			</view>
-			<view class="cate-item">
+			<view @click="navToList(17, 19)" class="cate-item">
 				<image src="/static/temp/c7.png"></image>
 				<text>生活百货</text>
 			</view>
-			<view class="cate-item">
+			<view @click="navToList(25, 27)" class="cate-item">
 				<image src="/static/temp/phone_icon.png"></image>
 				<text>手机数码</text>
 			</view>
@@ -57,11 +56,11 @@
 		<!-- 猜你喜欢 -->
 		<view class="f-header m-t">
 			<image src="/static/temp/like.png"></image>
-			<view class="tit-box">
+			<view class="">
 				<text class="tit">猜你喜欢</text>
-				<text class="tit2">Guess You Like It</text>
+				<!-- <text class="tit2">Guess You Like It</text> -->
 			</view>
-			<text class="yticon icon-you"></text>
+			<!-- <text class="yticon icon-you"></text> -->
 		</view>
 
 		<view class="guess-section">
@@ -127,13 +126,18 @@
 					console.log(error)
 				})
 			},
-
 			//详情页
 			navToDetailPage(item) {
 				//测试数据没有写id，用title代替
 				let id = item.id;
 				uni.navigateTo({
 					url: `/pages/product/product?id=${id}`
+				})
+			},
+			navToList(sid, tid){
+				console.log(sid,tid);
+				uni.navigateTo({
+					url: `/pages/product/list?fid=${this.currentId}&sid=${sid}&tid=${tid}`
 				})
 			},
 		},
@@ -245,7 +249,7 @@
 			width: 100%;
 			height: 300upx;
 			transition: .4s;
-			background-color: #02347B;
+			background-color: #ff8800;
 		}
 	}
 
@@ -426,6 +430,7 @@
 		}
 
 		.tit-box {
+			background-color: #ff8800;
 			flex: 1;
 			display: flex;
 			flex-direction: column;
