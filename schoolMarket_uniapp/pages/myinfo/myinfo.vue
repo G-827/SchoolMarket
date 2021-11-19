@@ -10,32 +10,40 @@
 			</view>
 		</view>
 		<uni-list class="user_detail">
+			<uni-list-item title="昵称">
+				<template slot="footer">
+					<input :placeholder="userInfo.username" v-model="userInfo.username" />
+				</template>
+			</uni-list-item>
 			<uni-list-item title="学院">
-			    <template slot="footer">
-			        <input :placeholder="userInfo.faculty" v-model="f" @blur="update(1,f)"/>
-			    </template>
+				<template slot="footer">
+					<input :placeholder="userInfo.faculty" v-model="userInfo.faculty" />
+				</template>
 			</uni-list-item>
 			<uni-list-item title="地址">
-			    <template slot="footer">
-			        <input :placeholder="userInfo.address" v-model="a" @blur="update(1,a)"/>
-			    </template>
+				<template slot="footer">
+					<input :placeholder="userInfo.address" v-model="userInfo.address" />
+				</template>
 			</uni-list-item>
 			<uni-list-item title="QQ号">
-			    <template slot="footer">
-			        <input :placeholder="userInfo.qqnumber" v-model="q" @blur="update(1,q)"/>
-			    </template>
+				<template slot="footer">
+					<input :placeholder="userInfo.qqnumber" v-model="userInfo.qqnumber" />
+				</template>
 			</uni-list-item>
 			<uni-list-item title="微信号">
-			    <template slot="footer">
-			        <input :placeholder="userInfo.vxnumber" v-model="v" @blur="update(1,v)"/>
-			    </template>
+				<template slot="footer">
+					<input :placeholder="userInfo.vxnumber" v-model="userInfo.vxnumber" />
+				</template>
 			</uni-list-item>
 			<!-- <uni-list-item title="学院" :rightText="userInfo.faculty"></uni-list-item>
 			<uni-list-item title="地址" :rightText="userInfo.address"></uni-list-item>
 			<uni-list-item title="QQ号" :rightText="userInfo.qqnumber"></uni-list-item>
 			<uni-list-item title="微信号" :rightText="userInfo.vxnumber"></uni-list-item> -->
-		</uni-list>
 
+		</uni-list>
+		<view class="subPart">
+			<button class="subBtn" form-type="submit" hover-class="subBtnPrs" @click="updateUser">确认修改</button>
+		</view>
 	</view>
 </template>
 
@@ -54,8 +62,9 @@
 					address: '',
 					qqnumber: '',
 					vxnumber: ''
-				}
-
+				},
+				username: '',
+				userId: -1,
 			};
 		},
 		// computed:{
@@ -63,11 +72,12 @@
 		// },
 		onLoad(options) {
 			let id = options.id;
+			this.userId = id;
 			this.getUserInfo(id)
 		},
 		methods: {
 			//getuserbyownerid
-			update(num,content){
+			update(num, content) {
 				console.log(content);
 			},
 			getUserInfo(id) {
@@ -80,6 +90,7 @@
 					},
 					success: function(res) {
 						console.log(res.data);
+						that.username = res.data.username;
 						that.userInfo.username = res.data.username;
 						that.userInfo.faculty = res.data.faculty;
 						that.userInfo.address = res.data.address;
@@ -87,10 +98,40 @@
 						that.userInfo.vxnumber = res.data.vxnumber;
 					},
 					fail: function(res) {
-						console.log(res)
+						console.log(res);
 					},
 				});
-
+			},
+			updateUser() {
+				var that = this;
+				uni.request({
+					url: 'http://localhost:8080/user/updateuser',
+					method: 'POST',
+					data: {
+						id: Number(this.userId),
+						username: that.userInfo.username,
+						faculty: that.userInfo.faculty,
+						address: that.userInfo.address,
+						qqnumber: that.userInfo.qqnumber,
+						vxnumber: that.userInfo.vxnumber,
+					},
+					header: {
+					    'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					success: function(res) {
+						console.log(res.data);
+						uni.showToast({
+							title: '修改成功！',
+							icon: 'success'
+						})
+						setTimeout(function() {
+							uni.navigateBack()
+						}, 2000);
+					},
+					fail: function(res) {
+						console.log(res)
+					}
+				})
 			}
 		}
 	}
@@ -101,11 +142,12 @@
 		background: $page-color-base;
 	}
 
-	input{
+	input {
 		display: block;
 		float: right;
 		text-align: right;
 	}
+
 	.user-section {
 		display: flex;
 		align-items: center;
@@ -114,6 +156,7 @@
 		padding: 40upx 30upx 0;
 		position: relative;
 		text-align: center;
+
 		.bg {
 			position: absolute;
 			left: 0;
@@ -160,14 +203,38 @@
 			right: 20upx;
 			bottom: 16upx;
 		}
-		
+
 		.name {
 			width: 200upx;
 			text-align: center;
 		}
-		
-		.title{
+
+		.title {
 			display: inline;
+		}
+	}
+	.subPart {
+		position: fixed;
+		bottom: 110upx;
+		left: 0;
+		right: 0;
+		padding: 30upx 40upx;
+		//background-color: #;
+	
+		.subBtn {
+			background: linear-gradient(to right, #ffac30, #fa436a, #ffac30);
+			border-radius: 100px;
+			font-size: 25upx;
+			font-weight: bold;
+			color: #ffffff;
+			box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
+		}
+	
+		.subBtnPrs {
+			background: #ea3e63;
+			top: 3upx;
+			left: 3upx;
+			box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
 		}
 	}
 </style>

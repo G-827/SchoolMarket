@@ -32,12 +32,12 @@
 					<text class="cell-tit clamp">分类</text>
 					<view class="cell-tip">
 						<select v-model="addData.type" required style={{}}>
-							<option value="1">书籍教材</option>
-							<option value="2">交通工具</option>
-							<option value="3">服装鞋帽</option>
-							<option value="4">生活百货</option>
-							<option value="5">手机数码</option>
-							<option value="6">其他</option>
+							<option value="书籍教材">书籍教材</option>
+							<option value="交通工具">交通工具</option>
+							<option value="服装鞋帽">服装鞋帽</option>
+							<option value="生活百货">生活百货</option>
+							<option value="手机数码">手机数码</option>
+							<option value="其他">其他</option>
 						</select>
 						<!-- <input placeholder="添加分类" v-model="addData.type"></input> -->
 					</view>
