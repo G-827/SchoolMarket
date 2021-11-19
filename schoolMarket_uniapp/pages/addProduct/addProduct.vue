@@ -37,6 +37,7 @@
 									<view class="uni-input">{{array[index]}}</view>
 								</picker>
 							</view>
+
 				</view>
 				<view class="yt-list-cell b-b">
 					<text class="cell-tit clamp">价格</text>
