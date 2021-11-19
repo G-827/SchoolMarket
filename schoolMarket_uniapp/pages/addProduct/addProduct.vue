@@ -2,7 +2,7 @@
 	<view class="container">
 		<view class="c-list">
 			<view class="imagePart">
-				<template  v-if="hasAddImage==false">
+				<template v-if="hasAddImage==false">
 					<image class="image-def" src="../../static/photo.png" mode="aspectFit" @click="ChooseImage"></image>
 					<text class="tit mid">添加照片</text>
 				</template>
@@ -31,7 +31,15 @@
 				<view class="yt-list-cell b-b">
 					<text class="cell-tit clamp">分类</text>
 					<view class="cell-tip">
-						<input placeholder="添加分类" v-model="addData.type"></input>
+						<select v-model="addData.type" required style={{}}>
+							<option value="1">书籍教材</option>
+							<option value="2">交通工具</option>
+							<option value="3">服装鞋帽</option>
+							<option value="4">生活百货</option>
+							<option value="5">手机数码</option>
+							<option value="6">其他</option>
+						</select>
+						<!-- <input placeholder="添加分类" v-model="addData.type"></input> -->
 					</view>
 				</view>
 				<view class="yt-list-cell b-b">
@@ -212,8 +220,8 @@
 									// 	//'relationId': obj.data.relationId,
 									// 	'url': res.tempFilePaths[0],
 									// };
-									self.addData.img_url=obj.img_url;
-									self.hasAddImage=true;
+									self.addData.img_url = obj.img_url;
+									self.hasAddImage = true;
 								},
 								fail: (res) => {
 									console.log("uploadFile fail");
