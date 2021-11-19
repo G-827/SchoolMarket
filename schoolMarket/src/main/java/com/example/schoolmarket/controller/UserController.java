@@ -51,7 +51,7 @@ public class UserController {
         return userService.DeleteUserById(id);
     }
 
-    @PutMapping("user/updateuser")
+    @PostMapping("user/updateuser")
     @ResponseBody
     //@UpdateProvider(type = UserDao.class, method = "UpdateUser")
     public String updateUser(User user){

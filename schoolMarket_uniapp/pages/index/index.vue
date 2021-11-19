@@ -27,23 +27,23 @@
 		</view>
 		<!-- 分类 -->
 		<view class="cate-section">
-			<view @click="navToList(5, 8)" class="cate-item">
+			<view @click="navToList(1)" class="cate-item">
 				<image src="/static/temp/book_icon.png"></image>
 				<text>书籍教材</text>
 			</view>
-			<view @click="navToList(6, 14)" class="cate-item">
+			<view @click="navToList(2)" class="cate-item">
 				<image src="/static/temp/bus_icon.png"></image>
 				<text>交通工具</text>
 			</view>
-			<view @click="navToList(26, 29)" class="cate-item">
+			<view @click="navToList(3)" class="cate-item">
 				<image src="/static/temp/c6.png"></image>
 				<text>服装鞋帽</text>
 			</view>
-			<view @click="navToList(17, 19)" class="cate-item">
+			<view @click="navToList(4)" class="cate-item">
 				<image src="/static/temp/c7.png"></image>
 				<text>生活百货</text>
 			</view>
-			<view @click="navToList(25, 27)" class="cate-item">
+			<view @click="navToList(5)" class="cate-item">
 				<image src="/static/temp/phone_icon.png"></image>
 				<text>手机数码</text>
 			</view>
@@ -134,10 +134,10 @@
 					url: `/pages/product/product?id=${id}`
 				})
 			},
-			navToList(sid, tid){
-				console.log(sid,tid);
+			navToList(type){
+				//console.log(sid,tid);
 				uni.navigateTo({
-					url: `/pages/product/list?fid=${this.currentId}&sid=${sid}&tid=${tid}`
+					url: `/pages/product/list?type=${type}`
 				})
 			},
 		},
