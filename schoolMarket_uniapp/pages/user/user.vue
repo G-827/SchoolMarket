@@ -3,7 +3,7 @@
 		
 		<view class="user-section">
 			<image class="bg" src="/static/user-bg.jpg"></image>
-			<view class="user-info-box" @click="naviTo(userInfo.id||'1')">
+			<view class="user-info-box" @click="naviTo(userInfo.id||'-1')">
 				<view class="portrait-box">
 					<image class="portrait" :src="userInfo.portrait || '/static/missing-face.png'"></image>
 				</view>
@@ -52,13 +52,14 @@
 			</view>
 		</view>
 		<view v-if="this.hasLogin" class="subPart">
-			<button class="subBtn" form-type="submit" hover-class="subBtnPrs" @click="logout">退出登录</button>
+			<button class="subBtn" form-type="submit" hover-class="subBtnPrs" @click="tologout">退出登录</button>
 		</view>
 	</view>  
 </template>  
 <script>  
 	import listCell from '@/components/mix-list-cell';
     import {  
+	    mapMutations,
         mapState 
     } from 'vuex';  
 	let startY = 0, moveY = 0, pageAtTop = true;
@@ -99,7 +100,9 @@
 			...mapState(['hasLogin','userInfo'])
 		},
         methods: {
-			logout() {
+			...mapMutations(['logout']),
+			
+			tologout() {
 				//退出登录
 				uni.showModal({
 					content: '确定要退出登录么',
@@ -120,10 +123,16 @@
 			 * navigator标签现在默认没有转场动画，所以用view
 			 */
 			naviTo(id){
-				uni.navigateTo({
+				if(id==-1){
+					uni.navigateTo({
+									url: '/pages/public/login'
+								})
+					
+				}else{
+					uni.navigateTo({
 									url: `/pages/myinfo/myinfo?id=${id}`
 								})
-				console.log(id);
+				}
 			},
 			navTo(url){
 				if(!this.hasLogin){
