@@ -31,6 +31,10 @@ public class ProductController {
         return productService.GetProductByUserId(id);
     }
 
+    @GetMapping("product/getproductbytype")
+    @ResponseBody
+    public List<Product> getProductByType(String type) { return productService.GetProductByType(type); }
+
     @PostMapping("product/addproduct")
     @ResponseBody
     public String addProduct(Product product)
