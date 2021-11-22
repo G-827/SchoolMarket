@@ -29,18 +29,15 @@
 			</view>
 			<view class="yt-list">
 				<view class="yt-list-cell b-b">
-					<text class="cell-tit clamp">分类</text>
-					<view class="cell-tip">
-						<select v-model="addData.type" required style={{}}>
-							<option value="书籍教材">书籍教材</option>
-							<option value="交通工具">交通工具</option>
-							<option value="服装鞋帽">服装鞋帽</option>
-							<option value="生活百货">生活百货</option>
-							<option value="手机数码">手机数码</option>
-							<option value="其他">其他</option>
-						</select>
-						<!-- <input placeholder="添加分类" v-model="addData.type"></input> -->
-					</view>
+					        <view class="cell-tit clamp">
+					            分类
+					        </view>
+							<view class="uni-list-cell-db">
+								<picker @change="bindPickerChange" :value="index" :range="array">
+									<view class="uni-input">{{array[index]}}</view>
+								</picker>
+							</view>
+
 				</view>
 				<view class="yt-list-cell b-b">
 					<text class="cell-tit clamp">价格</text>
@@ -65,6 +62,9 @@
 	export default {
 		data() {
 			return {
+				title: 'picker',
+				array: ['书籍教材', '交通工具', '服装鞋帽', '生活百货', '手机数码', '其他'],
+				index: 0,
 				hasAddImage: false,
 				addData: {
 					productname: "",
@@ -75,14 +75,16 @@
 					owner_name: "",
 					img_url: ""
 				}
-
-
 			}
 		},
 		computed: {
 			...mapState(['hasLogin', 'userInfo'])
 		},
 		methods: {
+			bindPickerChange: function(e) {
+				console.log('picker发送选择改变，携带值为', e.target.value)
+				this.index = e.target.value
+			},
 			submitProduct() {
 				//必须登录
 				//console.log(this.isLogin);
@@ -257,7 +259,7 @@
 	page {
 		background: $page-color-base;
 	}
-
+	
 	.c-list {
 		font-size: $font-sm + 2upx;
 		color: $font-color-base;
@@ -442,6 +444,24 @@
 			font-size: $font-base;
 			color: $font-color-dark;
 		}
+	}
+	
+	
+	
+	.uni-list-cell-left{
+		display: block;
+		float: left;
+		color: #606266;
+	}
+	
+	.uni-list-cell-db{
+		display: block;
+		float: right;
+		color: #606266;
+	}
+	
+	.clamp{
+		color: black;
 	}
 
 
