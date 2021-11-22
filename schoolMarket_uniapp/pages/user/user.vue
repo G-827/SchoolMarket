@@ -3,7 +3,7 @@
 		
 		<view class="user-section">
 			<image class="bg" src="/static/user-bg.jpg"></image>
-			<view class="user-info-box" @click="naviTo(userInfo.id||'1')">
+			<view class="user-info-box" @click="naviTo(userInfo.id||'-1')">
 				<view class="portrait-box">
 					<image class="portrait" :src="userInfo.portrait || '/static/missing-face.png'"></image>
 				</view>
@@ -117,10 +117,15 @@
 			 * navigator标签现在默认没有转场动画，所以用view
 			 */
 			naviTo(id){
-				uni.navigateTo({
-									url: `/pages/myinfo/myinfo?id=${id}`
-								})
-				console.log(id);
+				if (id==-1){
+					uni.navigateTo({
+						url:'../public/login'
+					})
+				}else{
+					uni.navigateTo({
+						url: `/pages/myinfo/myinfo?id=${id}`
+					})
+				}
 			},
 			navTo(url){
 				if(!this.hasLogin){

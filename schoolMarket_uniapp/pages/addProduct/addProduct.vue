@@ -140,9 +140,20 @@
 							title: '发布成功！',
 							icon: 'success'
 						})
-						uni.switchTab({
-							url: '../index/index'
-						})
+						that.addData = {
+							productname: "",
+							price: "",
+							type: "",
+							detail: "",
+							owner_id: -1,
+							owner_name: "",
+							img_url: ""
+						}
+						setTimeout(
+						function() {
+							uni.switchTab({url: '../index/index'})
+						},1000)
+						
 					},
 					fail: function(res) {
 						console.log(res)

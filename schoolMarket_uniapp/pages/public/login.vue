@@ -62,7 +62,15 @@
 			...mapMutations(['login']),
 			
 			navBack(){
+				// let pages=getCurrentPages()
+				// console.log(pages)
+				// if(pages[pages.length-2].route=="pages/public/register"){
+				// 	uni.navigateBack();
+				// }else{
+				// 	uni.navigateBack();
+				// }
 				uni.navigateBack();
+				
 			},
 			toRegist(){
 				uni.navigateTo({
