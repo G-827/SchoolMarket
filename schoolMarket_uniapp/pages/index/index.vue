@@ -3,7 +3,7 @@
 		<!-- 小程序头部兼容 -->
 		<!-- #ifdef MP -->
 		<view class="mp-search-box">
-			<input class="ser-input" type="text" value="输入关键字搜索" v-model="search" />
+			<input class="ser-input" @input="replaceInput" v-model="changeValue"/>
 		</view>
 		<!-- #endif -->
 
@@ -18,12 +18,6 @@
 					<image :src="item.src" />
 				</swiper-item>
 			</swiper>
-			<!-- 自定义swiper指示器 -->
-			<!-- <view class="swiper-dots">
-				<text class="num">{{swiperCurrent+1}}</text>
-				<text class="sign">/</text>
-				<text class="num">{{swiperLength}}</text>
-			</view> -->
 		</view>
 		<!-- 分类 -->
 		<view class="cate-section">
@@ -48,10 +42,6 @@
 				<text>手机数码</text>
 			</view>
 		</view>
-<!-- 
-		<view class="ad-1">
-			<image src="/static/temp/mid.jpg" mode="widthFix"></image>
-		</view> -->
 
 		<!-- 猜你喜欢 -->
 		<view class="f-header m-t">
@@ -72,8 +62,6 @@
 				<text class="price">￥{{item.price}}</text>
 			</view>
 		</view>
-
-
 	</view>
 </template>
 
@@ -141,12 +129,20 @@
 					url: `/pages/product/list?type=${type}`
 				})
 			},
+			
+			replace(){
+			            // var value = event.target.value;
+			            console.log("search");
+			        },
 		},
-		// #ifndef MP
+		
 		// 标题栏input搜索框点击
-		onNavigationBarSearchInputClicked: async function(e) {
-			 this.$api.msg('跳转至搜索页');
-		},
+		// onNavigationBarSearchInputClicked: async function(e) {
+		// 	 uni.navigateTo({
+		// 	 	url: `/pages/search/search`
+		// 	 })
+		// },
+		
 		//点击导航栏 buttons 时触发
 		onNavigationBarButtonTap(e) {
 			const index = e.index;
@@ -166,7 +162,7 @@
 				})
 			}
 		}
-		// #endif
+		
 	}
 </script>
 

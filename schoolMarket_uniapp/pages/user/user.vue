@@ -66,12 +66,17 @@
 				<list-cell icon="icon-shezhi1" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
 			</view>
 		</view>
+		
+		<view v-if="this.hasLogin" class="subPart">
+			<button class="subBtn" form-type="submit" hover-class="subBtnPrs" @click="toLogout">退出登录</button>
+		</view>
     </view>  
 </template>  
 <script>  
 	import listCell from '@/components/mix-list-cell';
     import {  
-        mapState 
+        mapState,
+	    mapMutations 
     } from 'vuex';  
 	let startY = 0, moveY = 0, pageAtTop = true;
     export default {
@@ -111,7 +116,21 @@
 			...mapState(['hasLogin','userInfo'])
 		},
         methods: {
-
+			...mapMutations(['logout']),
+			//退出登录
+			toLogout(){
+				uni.showModal({
+				    content: '确定要退出登录么',
+				    success: (e)=>{
+				    	if(e.confirm){
+				    		this.logout();
+				    		setTimeout(()=>{
+				    			uni.navigateBack();
+				    		}, 200)
+				    	}
+				    }
+				});
+			},
 			/**
 			 * 统一跳转接口,拦截未登录路由
 			 * navigator标签现在默认没有转场动画，所以用view
@@ -354,4 +373,28 @@
 		}
 	}
 	
+	.subPart {
+		position: fixed;
+		bottom: 110upx;
+		left: 0;
+		right: 0;
+		padding: 30upx 40upx;
+		//background-color: #;
+	
+		.subBtn {
+			background: linear-gradient(to right, #ffac30, #fa436a, #ffac30);
+			border-radius: 100px;
+			font-size: 25upx;
+			font-weight: bold;
+			color: #ffffff;
+			box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
+		}
+	
+		.subBtnPrs {
+			background: #ea3e63;
+			top: 3upx;
+			left: 3upx;
+			box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
+		}
+	}
 </style>
