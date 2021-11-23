@@ -10,6 +10,7 @@ import java.util.Map;
 @Service
 public interface ProductService {
     List<Product> GetAllProduct();
+    List<Product> GetProduct();
     Product GetProductById(Integer id);
     List<Product> GetProductByUserId(Integer id);
     List<Product> GetProductByType(String type);

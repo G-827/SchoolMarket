@@ -14,6 +14,9 @@ public interface ProductDao {
     @Select("select * from product WHERE state = 0 ORDER BY datetime desc ")
     List<Product> GetAllProduct();
 
+    @Select("select * from product ORDER BY id desc ")
+    List<Product> GetProduct();
+
     @Select("SELECT * FROM product WHERE id = #{id} ")
     Product GetProductById(Integer id);
 

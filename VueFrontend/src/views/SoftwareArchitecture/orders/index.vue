@@ -17,19 +17,20 @@
       width="30%"
     >
       <el-form :model="upDateData" :inline="true">
-        <el-form-item label="序号">
+        <el-form-item label="ID">
           <el-input v-model="upDateData.id" :disabled="true" size="small" />
         </el-form-item>
-        <el-form-item label="菜名">
+        <el-form-item label="时间">
           <el-input v-model="upDateData.name" size="small" placeholder="菜名" />
         </el-form-item>
-        <el-form-item label="图片链接">
+        <el-form-item label="买家">
           <el-input v-model="upDateData.img_url" size="small" placeholder="图片链接" />
         </el-form-item>
-        <el-form-item label="食堂">
-          <el-select v-model="upDateData.canteen" size="small" placeholder="食堂">
-            <el-option v-for="(item) in canteens" :key="item.id" :label="item.name" :value="item.name" />
-          </el-select>
+        <el-form-item label="卖家">
+          <el-input v-model="upDateData.img_url" size="small" placeholder="图片链接" />
+        </el-form-item>
+        <el-form-item label="商品名">
+          <el-input v-model="upDateData.img_url" size="small" placeholder="图片链接" />
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -50,9 +51,9 @@
             </el-select>
           </el-form-item>
           <el-form-item>
-            <el-button type="success" size="mini" @click="AddFood">添加</el-button>
-            <el-button type="primary" size="mini" @click="SearchFood">搜索</el-button>
-            <el-button type="plain" size="mini" @click="getAllFood">刷新</el-button>
+            <el-button type="success" size="mini" @click="AddOrder">添加</el-button>
+            <el-button type="primary" size="mini" @click="SearchOrder">搜索</el-button>
+            <el-button type="plain" size="mini" @click="getAllOrder">刷新</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -66,17 +67,20 @@
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
-            <el-form-item label="编号">
+            <el-form-item label="ID">
               <span>{{ props.row.id }}</span>
             </el-form-item>
-            <el-form-item label="菜名">
-              <span>{{ props.row.name }}</span>
+            <el-form-item label="时间">
+              <span>{{ props.row.datetime }}</span>
             </el-form-item>
-            <el-form-item label="图片链接">
-              <span>{{ props.row.img_url }}</span>
+            <el-form-item label="买家">
+              <span>{{ props.row.buyername }}</span>
             </el-form-item>
-            <el-form-item label="食堂">
-              <span>{{ props.row.canteen }}</span>
+            <el-form-item label="卖家">
+              <span>{{ props.row.sellername }}</span>
+            </el-form-item>
+            <el-form-item label="商品名">
+              <span>{{ props.row.productname }}</span>
             </el-form-item>
           </el-form>
         </template>
@@ -88,23 +92,39 @@
         sortable="custom"
       >
         <template slot-scope="scope">
-          <span style="margin-left: 10px">{{ scope.row.id }}</span>
+          <span style="margin-left: 10px">{{ scope.row.orderid }}</span>
         </template>
       </el-table-column>
       <el-table-column
         align="center"
-        label="菜名"
+        label="时间"
       >
         <template slot-scope="scope">
-          <span style="margin-left: 10px">{{ scope.row.name }}</span>
+          <span style="margin-left: 10px">{{ scope.row.datetime }}</span>
         </template>
       </el-table-column>
       <el-table-column
         align="center"
-        label="食堂"
+        label="买家"
       >
         <template slot-scope="scope">
-          <span style="margin-left: 10px">{{ scope.row.canteen }}</span>
+          <span style="margin-left: 10px">{{ scope.row.buyername }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        label="卖家"
+      >
+        <template slot-scope="scope">
+          <span style="margin-left: 10px">{{ scope.row.sellername }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        label="商品名"
+      >
+        <template slot-scope="scope">
+          <span style="margin-left: 10px">{{ scope.row.productname }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -169,13 +189,12 @@ export default {
   },
   created() {
     var that = this
-    that.getAllFood()
-    that.getAllCanteen()
+    that.getAllOrder()
   },
   methods: {
-    getAllFood() {
+    getAllOrder() {
       var that = this
-      axios.get(this.$store.state.foodHeadUrl + 'GetAllFood').then(function(response) {
+      axios.get(this.$store.state.orderHeadUrl + 'getallorder').then(function(response) {
         that.allData = response.data
         that.tableData = response.data
         console.log(that.tableData)
@@ -183,30 +202,18 @@ export default {
         console.log(error)
       })
     },
-    getAllCanteen() {
-      var that = this
-      axios.get(this.$store.state.canteenHeadUrl + 'GetAllCanteen').then(function(response) {
-        that.canteens = response.data
-        that.canteens.unshift({
-          'name': ''
-        })
-        console.log(that.canteens)
-      }).catch(function(error) {
-        console.log(error)
-      })
-    },
-    deleteFoodById(id) {
-      axios.delete(this.$store.state.foodHeadUrl + 'DeleteFoodById/' + id).then(function(response) {
+    deleteOrderById(id) {
+      axios.delete(this.$store.state.orderHeadUrl + 'deleteorderbyid/' + id).then(function(response) {
         console.log(response.data)
       }).catch(function(error) {
         console.log(error)
       })
     },
-    addFood() {
+    addOrder() {
       var that = this
       axios({
         method: 'post',
-        url: this.$store.state.foodHeadUrl + 'AddFood',
+        url: this.$store.state.orderHeadUrl + 'addorder',
         data: {
           'id': that.addData.id,
           'name': that.addData.name,
@@ -227,14 +234,14 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       }).then(function(response) {
-        that.getAllFood()
+        that.getAllOrder()
       })
     },
-    updateFood() {
+    updateOrder() {
       var that = this
       axios({
         method: 'post',
-        url: this.$store.state.foodHeadUrl + 'UpdateFood',
+        url: this.$store.state.orderHeadUrl + 'updateOrder',
         data: {
           'id': that.upDateData.id,
           'name': that.upDateData.name,
@@ -255,7 +262,7 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       }).then(function(response) {
-        that.getAllFood()
+        that.getAllOrder()
       })
     },
     handleCurrentChange(currentPage) {
@@ -279,7 +286,7 @@ export default {
         this.currentPage--
       }
       console.log('id:' + id)
-      this.deleteFoodById(id)
+      this.deleteOrderById(id)
     },
     handleEdit(id, row) {
       this.UpdatedialogVisible = true
@@ -287,19 +294,19 @@ export default {
       this.upDateData = JSON.parse(JSON.stringify(this.tableData[index]))
     },
     commitEdit() {
-      this.updateFood()
+      this.updateOrder()
       this.UpdatedialogVisible = false
     },
-    AddFood() {
+    AddOrder() {
       var that = this
       if (that.addData.name === '' || that.addData.canteen === '') {
         that.InvalidInputDialogVisible = true
         return
       }
       console.log(that.addData)
-      that.addFood()
+      that.addOrder()
     },
-    SearchFood() {
+    SearchOrder() {
       var that = this
       that.currentPage = 1
       that.tableData = that.allData.filter(item => {
@@ -310,7 +317,7 @@ export default {
     SortById() {
       this.sortState = (this.sortState + 1) % 3
       if (this.sortState === 1) {
-        this.tableData.reverse()
+        this.tableData.sort((a, b) => b.orderid - a.orderid)
       } else if (this.sortState === 2) {
         this.tableData.reverse()
       }
