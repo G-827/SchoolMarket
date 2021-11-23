@@ -84,6 +84,7 @@
 			bindPickerChange: function(e) {
 				console.log('picker发送选择改变，携带值为', e.target.value)
 				this.index = e.target.value
+				this.addData.type = array[this.index]
 			},
 			submitProduct() {
 				//必须登录
@@ -142,9 +143,20 @@
 							title: '发布成功！',
 							icon: 'success'
 						})
-						uni.switchTab({
-							url: '../index/index'
-						})
+						that.addData = {
+							productname: "",
+							price: "",
+							type: "",
+							detail: "",
+							owner_id: -1,
+							owner_name: "",
+							img_url: ""
+						}
+						setTimeout(
+						function() {
+							uni.switchTab({url: '../index/index'})
+						},1000)
+						
 					},
 					fail: function(res) {
 						console.log(res)

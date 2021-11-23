@@ -86,9 +86,7 @@
 							icon: 'success'
 						})
 						setTimeout(function() {
-							uni.navigateTo({
-								url: './login'
-							})
+							uni.navigateBack()
 						}, 2000);
 					},
 					fail: function(e) {

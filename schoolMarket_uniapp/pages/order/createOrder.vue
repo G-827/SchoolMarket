@@ -18,7 +18,7 @@
 
 		<view class="goods-section">
 			<view class="g-header b-b">
-				<image class="logo" src="http://duoduo.qibukj.cn/./Upload/Images/20190321/201903211727515.png"></image>
+				<image class="logo" src="../../static/missing-face.png"></image>
 				<text class="name">{{goodinfo.owner_name}}</text>
 			</view>
 			<!-- 商品列表 -->
@@ -56,7 +56,7 @@
 			<view class="price-content">
 				<text>实付款</text>
 				<text class="price-tip">￥</text>
-				<text class="price">475</text>
+				<text class="price">{{goodinfo.price}}</text>
 			</view>
 			<text class="submit" @click="addOrder">提交订单</text>
 		</view>
@@ -156,7 +156,8 @@
 						sellername: that.goodinfo.owner_name,
 						productid: new Number(that.goodinfo.id),
 						productname: that.goodinfo.productname,
-						price: that.goodinfo.price
+						price: that.goodinfo.price,
+						img_url: that.goodinfo.img_url
 					},
 					header: {
 						'content-type': 'application/x-www-form-urlencoded'

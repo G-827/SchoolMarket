@@ -24,6 +24,21 @@
 			@touchend="coverTouchend"
 		>
 			<image class="arc" src="/static/arc.png"></image>
+			
+			<!-- <view class="tj-sction">
+				<view class="tj-item">
+					<text class="num">128.8</text>
+					<text>余额</text>
+				</view>
+				<view class="tj-item">
+					<text class="num">0</text>
+					<text>优惠券</text>
+				</view>
+				<view class="tj-item">
+					<text class="num">20</text>
+					<text>积分</text>
+				</view>
+			</view> -->
 			<!-- 订单 -->
 			<view class="order-section">
 				<view class="order-item" @click="navTo('/pages/order/order?state=0')" hover-class="common-hover"  :hover-stay-time="50">
@@ -38,7 +53,7 @@
 					<text class="yticon icon-yishouhuo"></text>
 					<text>全部订单</text>
 				</view>
-				<view class="order-item" @click="navTo('/pages/order/order?state=4')" hover-class="common-hover"  :hover-stay-time="50">
+				<view class="order-item" @click="navTo('/pages/product/myproduct')" hover-class="common-hover"  :hover-stay-time="50">
 					<text class="yticon icon-shouhoutuikuan"></text>
 					<text>我发布的</text>
 				</view>
@@ -51,15 +66,11 @@
 				<list-cell icon="icon-shezhi1" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
 			</view>
 		</view>
-		<view v-if="this.hasLogin" class="subPart">
-			<button class="subBtn" form-type="submit" hover-class="subBtnPrs" @click="tologout">退出登录</button>
-		</view>
-	</view>  
+    </view>  
 </template>  
 <script>  
 	import listCell from '@/components/mix-list-cell';
     import {  
-	    mapMutations,
         mapState 
     } from 'vuex';  
 	let startY = 0, moveY = 0, pageAtTop = true;
@@ -100,38 +111,20 @@
 			...mapState(['hasLogin','userInfo'])
 		},
         methods: {
-			...mapMutations(['logout']),
-			
-			tologout() {
-				//退出登录
-				uni.showModal({
-					content: '确定要退出登录么',
-					success: (e)=>{
-					    if(e.confirm){
-					    	this.logout();
-					    	setTimeout(()=>{
-					    		uni.navigateBack();
-					    	}, 200)
-					    }
-					}
-				});
-				console.log("退出登陆");
-			},
 
 			/**
 			 * 统一跳转接口,拦截未登录路由
 			 * navigator标签现在默认没有转场动画，所以用view
 			 */
 			naviTo(id){
-				if(id==-1){
+				if (id==-1){
 					uni.navigateTo({
-									url: '/pages/public/login'
-								})
-					
+						url:'../public/login'
+					})
 				}else{
 					uni.navigateTo({
-									url: `/pages/myinfo/myinfo?id=${id}`
-								})
+						url: `/pages/myinfo/myinfo?id=${id}`
+					})
 				}
 			},
 			navTo(url){
@@ -358,31 +351,6 @@
 				margin-right: 20upx;
 				border-radius: 10upx;
 			}
-		}
-	}
-	
-	.subPart {
-		position: fixed;
-		bottom: 110upx;
-		left: 0;
-		right: 0;
-		padding: 30upx 40upx;
-		//background-color: #;
-	
-		.subBtn {
-			background: linear-gradient(to right, #ffac30, #fa436a, #ffac30);
-			border-radius: 100px;
-			font-size: 25upx;
-			font-weight: bold;
-			color: #ffffff;
-			box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
-		}
-	
-		.subBtnPrs {
-			background: #ea3e63;
-			top: 3upx;
-			left: 3upx;
-			box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
 		}
 	}
 	

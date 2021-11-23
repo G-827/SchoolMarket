@@ -5,7 +5,7 @@
 				综合排序
 			</view>
 			<view class="nav-item" :class="{current: filterIndex === 1}" @click="tabClick(1)">
-				销量优先
+				时间优先
 			</view>
 			<view class="nav-item" :class="{current: filterIndex === 2}" @click="tabClick(2)">
 				<text>价格</text>
@@ -143,16 +143,17 @@
 					this.loadingType = 'more'
 				}
 
-				this.getProduct();
+				var goodList=this.getProduct();
+				//console.log(goodList)
 				if (type === 'refresh') {
 					this.goodsList = [];
 				}
 				//筛选，测试数据直接前端筛选了
 				if (this.filterIndex === 1) {
-					goodsList.sort((a, b) => b.sales - a.sales)
+					goodList.sort((a, b) => b.sales - a.sales)
 				}
 				if (this.filterIndex === 2) {
-					goodsList.sort((a, b) => {
+					goodList.sort((a, b) => {
 						if (this.priceOrder == 1) {
 							return a.price - b.price;
 						}
@@ -160,7 +161,7 @@
 					})
 				}
 
-				this.goodsList = this.goodsList.concat(goodsList);
+				this.goodsList = this.goodsList.concat(goodList);
 
 				//判断是否还有下一页，有是more  没有是nomore(测试数据判断大于20就没有了)
 				this.loadingType = this.goodsList.length > 20 ? 'nomore' : 'more';
@@ -186,11 +187,30 @@
 				uni.pageScrollTo({
 					duration: 300,
 					scrollTop: 0
-				})
-				this.loadData('refresh', 1);
+				})//滚动到顶部
+				//this.loadData('refresh', 1);
+				
 				uni.showLoading({
 					title: '正在加载'
 				})
+				this.sort();
+			},
+			sort(){
+				if (this.filterIndex === 1) {
+					this.goodsList.sort((a, b) => b.id - a.id )
+				}
+				if (this.filterIndex === 2) {
+					this.goodsList.sort((a, b) => {
+						if (this.priceOrder == 1) {
+							return a.price - b.price;
+						}
+						return b.price - a.price;
+					})
+				}
+				setTimeout(function() {
+					uni.hideLoading();
+				}, 500);
+				
 			},
 			//显示分类面板
 			toggleCateMask(type) {
@@ -233,7 +253,9 @@
 					},
 					success: function(res) {
 						that.goodsList = res.data
+						
 						console.log(res.data)
+						//return res.data
 					},
 					fail: function(res) {
 						console.log(res)

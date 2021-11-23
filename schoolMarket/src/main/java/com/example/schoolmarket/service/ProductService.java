@@ -17,4 +17,5 @@ public interface ProductService {
     String DeleteProductById(Integer id);
     String UpdateProduct(Product product);
     Map<String, String> uploadImg(MultipartFile file);
+    String UpdateStateById(Integer id);
 }

@@ -62,7 +62,15 @@
 			...mapMutations(['login']),
 			
 			navBack(){
+				// let pages=getCurrentPages()
+				// console.log(pages)
+				// if(pages[pages.length-2].route=="pages/public/register"){
+				// 	uni.navigateBack();
+				// }else{
+				// 	uni.navigateBack();
+				// }
 				uni.navigateBack();
+				
 			},
 			toRegist(){
 				uni.navigateTo({
@@ -85,15 +93,23 @@
 					},
 					success: function(res) {
 						console.log(res)
-						uni.showToast({
-							title: '登录成功！',
-							icon: 'success'
-						})
-						//TODO：存用户信息
-						that.login(res.data);
-						//跳转到主页
-						that.navBack();
-						//console.log("??")
+						if(res.data==""){
+							uni.showToast({
+								title: '用户不存在或密码错误！',
+								icon: 'none'
+							})
+						}
+						else{
+							uni.showToast({
+								title: '登录成功！',
+								icon: 'success'
+							})
+							//TODO：存用户信息
+							that.login(res.data);
+							//跳转到主页
+							that.navBack();
+							//console.log("??")
+						}
 					},
 					fail: function(e) {
 						console.log(e)

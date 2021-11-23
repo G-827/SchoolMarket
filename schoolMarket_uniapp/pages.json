@@ -203,6 +203,15 @@
 			}
             
         }
+        ,{
+            "path" : "pages/product/myproduct",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的发布",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

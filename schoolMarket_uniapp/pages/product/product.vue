@@ -8,10 +8,12 @@
 
 		<view class="introduce-section">
 			<text class="title">{{goodinfo.productname}}</text>
+			<image src="../../static/offshelf.png" class="offshelf" mode="aspectFit" v-show="goodinfo.state"></image>
 			<view class="price-box">
 				<text class="price-tip">¥</text>
 				<text class="price">{{goodinfo.price}}</text>
 			</view>
+			
 			<!-- 			<view class="bot-row">
 				<text>销量: 108</text>
 				<text>库存: 4690</text>
@@ -124,7 +126,8 @@
 					detail: "",
 					owner_id: "",
 					owner_name: "",
-					img_url: ""
+					img_url: "",
+					state: ""
 				},
 				favorite: true,
 				shareList: [],
@@ -448,6 +451,13 @@
 				flex: 1;
 			}
 		}
+	}
+	/* 下架 */
+	.offshelf {
+		position: absolute;
+		height: 80px;
+		width: 100px;
+		right: 50px;
 	}
 
 	/* 分享 */

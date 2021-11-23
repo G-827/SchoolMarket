@@ -26,11 +26,11 @@ public interface OrderDao {
     List<Order> GetOrderByUserId_all(Integer user_id);
 
     @Insert("INSERT into " +
-            "orderlist (datetime,buyerid,buyername,sellerid,sellername,productid,productname,price) " +
-            "values (#{datetime},#{buyerid},#{buyername},#{sellerid},#{sellername},#{productid},#{productname},#{price})")
+            "orderlist (datetime,buyerid,buyername,sellerid,sellername,productid,productname,price,img_url) " +
+            "values (#{datetime},#{buyerid},#{buyername},#{sellerid},#{sellername},#{productid},#{productname},#{price},#{img_url})")
     int AddOrder(Order order);
 
-    @Delete("DELETE FROM order WHERE id = #{id}")
+    @Delete("DELETE FROM orderlist WHERE orderid = #{id}")
     int DeleteOrderById(Integer id);
 }
 

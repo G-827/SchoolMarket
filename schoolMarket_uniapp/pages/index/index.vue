@@ -3,7 +3,7 @@
 		<!-- 小程序头部兼容 -->
 		<!-- #ifdef MP -->
 		<view class="mp-search-box">
-			<input class="ser-input" type="text" value="输入关键字搜索" disabled />
+			<input class="ser-input" type="text" value="输入关键字搜索" v-model="search" />
 		</view>
 		<!-- #endif -->
 
@@ -86,7 +86,8 @@
 				swiperCurrent: 0,
 				swiperLength: 0,
 				carouselList: [],
-				goodsList: []
+				goodsList: [],
+				search: "",
 			};
 		},
 
@@ -144,7 +145,7 @@
 		// #ifndef MP
 		// 标题栏input搜索框点击
 		onNavigationBarSearchInputClicked: async function(e) {
-			// this.$api.msg('点击了搜索框');
+			 this.$api.msg('跳转至搜索页');
 		},
 		//点击导航栏 buttons 时触发
 		onNavigationBarButtonTap(e) {

@@ -144,4 +144,16 @@ public class ProductServiceImpl implements ProductService {
         return map;
     }
 
+    @Override
+    public String UpdateStateById(Integer id) {
+        try {
+            int i = productDao.UpdateStateById(id);
+            return "成功下架"+ i +"个商品";
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+    }
+
 }
