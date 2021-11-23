@@ -34,4 +34,7 @@ public interface ProductDao {
             "WHERE id = #{id}")
     int UpdateProduct(Product product);
 
+    @Update("UPDATE product SET state=1 WHERE id = #{id}")
+    int UpdateStateById(Integer id);
+
 }

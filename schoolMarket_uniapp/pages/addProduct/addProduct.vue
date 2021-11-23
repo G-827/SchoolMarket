@@ -84,6 +84,7 @@
 			bindPickerChange: function(e) {
 				console.log('picker发送选择改变，携带值为', e.target.value)
 				this.index = e.target.value
+				this.addData.type = array[this.index]
 			},
 			submitProduct() {
 				//必须登录

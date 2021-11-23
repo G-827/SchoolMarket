@@ -60,4 +60,10 @@ public class ProductController {
     public Map uploadImg(@RequestParam(value = "file",required = false) MultipartFile file){
         return productService.uploadImg(file);
     }
+
+    @PostMapping("product/updatestatebyid")
+    @ResponseBody
+    public String updateStateById(Integer id){
+        return productService.UpdateStateById(id);
+    }
 }

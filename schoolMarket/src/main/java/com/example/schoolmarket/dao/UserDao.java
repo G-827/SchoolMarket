@@ -19,9 +19,6 @@ public interface UserDao {
     @Select("SELECT * FROM user WHERE id = #{id}")
     User GetUserById(Integer id);
 
-    @Select("SELECT * FROM user WHERE id = #{owner_id}")
-    User GetUserByUserId(Integer owner_id);
-
     @Select("SELECT * FROM user WHERE username=#{username} AND password=#{password}")
     User Login(String username, String password);
 

@@ -30,7 +30,7 @@ public interface OrderDao {
             "values (#{datetime},#{buyerid},#{buyername},#{sellerid},#{sellername},#{productid},#{productname},#{price},#{img_url})")
     int AddOrder(Order order);
 
-    @Delete("DELETE FROM order WHERE id = #{id}")
+    @Delete("DELETE FROM orderlist WHERE orderid = #{id}")
     int DeleteOrderById(Integer id);
 }
 

@@ -1,49 +1,25 @@
 <template>
 	<view class="content">
-		<view class="navbar">
-			<view v-for="(item, index) in navList" :key="index" class="nav-item"
-				:class="{current: tabCurrentIndex === index}" @click="tabClick(index)">
-				{{item.text}}
+
+		<!-- 商品列表 " -->
+		<view v-for="(Item, Index) in productList" :key="Index" class="order-item">
+			<view class="i-top b-b">
+				<text class="time">{{Item.datetime}}</text>
+			</view>
+			<view class="goods-box-single" @click="navToDetailPage(Item)">
+				<image class="goods-img" :src="Item.img_url" mode="aspectFill"></image>
+				<image class="offshelf" src="../../static/offshelf2.png" mode="aspectFill" v-show="Item.state==1"></image>
+				<view class="right">
+					<text class="title clamp">{{Item.productname}}</text>
+					<text class="price">{{Item.price}}</text>
+				</view>
+			</view>
+
+			<view class="action-box b-t">
+				<button class="action-btn recom" @click="changeState(Item)" v-show="Item.state==0">下架商品</button>
+				<!-- <button class="action-btn recom">立即支付</button> -->
 			</view>
 		</view>
-
-		<swiper :current="tabCurrentIndex" class="swiper-box" duration="300" @change="changeTab">
-			<swiper-item class="tab-content" v-for="(tabItem,tabIndex) in navList" :key="tabIndex">
-				<scroll-view class="list-scroll-content" scroll-y>
-					<!-- @scrolltolower="loadData" -->
-
-					<!-- 空白页 -->
-					<!-- <empty v-if="tabItem.loaded === true && tabItem.orderList.length === 0"></empty> -->
-
-					<!-- 订单列表 " -->
-					<view v-for="(orderItem, orderIndex) in tabItem.orderList" :key="orderIndex" class="order-item">
-						<view class="i-top b-b">
-							<text class="time">{{orderItem.datetime}}</text>
-						</view>
-						<view class="goods-box-single" @click="navToDetailPage(orderItem)">
-							<image class="goods-img" :src="orderItem.img_url" mode="aspectFill"></image>
-							<view class="right">
-								<text class="title clamp">{{orderItem.productname}}</text>
-								<!-- <text class="attr-box">{{goodsItem.attr}}  x {{goodsItem.number}}</text> -->
-								<text class="price">{{orderItem.price}}</text>
-							</view>
-						</view>
-
-						<!-- <view class="price-box">
-							共
-							<text class="num">7</text>
-							件商品 实付款
-							<text class="price">143.7</text>
-						</view> -->
-						<view class="action-box b-t">
-							<button class="action-btn" @click="cancelOrder(orderItem)">取消订单</button>
-							<button class="action-btn recom">立即支付</button>
-						</view>
-						<!-- <uni-load-more :status="tabItem.loadingType"></uni-load-more> -->
-					</view>
-				</scroll-view>
-			</swiper-item>
-		</swiper>
 	</view>
 </template>
 
@@ -64,119 +40,19 @@
 		},
 		data() {
 			return {
-				tabCurrentIndex: 0,
-				navList: [{
-						state: 0,
-						text: '我买的',
-						loadingType: 'more',
-						orderList: []
-					},
-					{
-						state: 1,
-						text: '我卖的',
-						loadingType: 'more',
-						orderList: []
-					},
-					{
-						state: 2,
-						text: '全部',
-						loadingType: 'more',
-						orderList: []
-					}
-				],
-
-
+				productList: [],
 			};
 		},
 
 		onLoad(options) {
-			/**
-			 * 修复app端点击除全部订单外的按钮进入时不加载数据的问题
-			 * 替换onLoad下代码即可
-			 */
-			this.tabCurrentIndex = +options.state;
-			// // #ifndef MP
-			// this.loadData()
-			// // #endif
-			// // #ifdef MP
-			// if (options.state == 0) {
-			// 	this.loadData()
-			// }
-			// // #endif
 			this.loadData()
 
 		},
 
 		methods: {
 			//获取订单列表
-			loadData(source) {
-				//这里是将订单挂载到tab列表下
-				let index = this.tabCurrentIndex;
-				let navItem = this.navList[index];
-				let state = navItem.state;
-
-				if (source === 'tabChange' && navItem.loaded === true) {
-					//tab切换只有第一次需要加载数据
-					return;
-				}
-				this.getAllOrder();
-				this.getBuyOrder();
-				this.getSellOrder();
-				//this.getProductByUserId();
-			},
-			getAllOrder() {
-				var that = this;
-				uni.request({
-					url: 'http://localhost:8080/order/getorderbyuserid/all?',
-					method: 'GET',
-					data: {
-						id: that.userInfo.id,
-					},
-					success: function(res) {
-						that.navList[2].orderList = res.data;
-						console.log(res.data)
-					},
-					fail: function(res) {
-						console.log(res)
-					}
-
-				});
-			},
-			getBuyOrder() {
-				var that = this;
-				uni.request({
-					url: 'http://localhost:8080/order/getorderbyuserid/buy?',
-					method: 'GET',
-					data: {
-						id: that.userInfo.id,
-					},
-					success: function(res) {
-						that.navList[0].orderList = res.data;
-						console.log(res.data)
-					},
-					fail: function(res) {
-						console.log(res)
-					}
-
-				});
-			},
-			getSellOrder() {
-				var that = this;
-				uni.request({
-					url: 'http://localhost:8080/order/getorderbyuserid/sell?',
-					method: 'GET',
-					data: {
-						id: that.userInfo.id,
-					},
-					success: function(res) {
-						that.navList[1].orderList = res.data;
-						console.log(res.data)
-					},
-					fail: function(res) {
-						console.log(res)
-					}
-
-				});
+			loadData() {
+				this.getProductByUserId();
 			},
 			getProductByUserId() {
 				var that = this;
@@ -187,104 +63,37 @@
 						id: that.userInfo.id,
 					},
 					success: function(res) {
-						that.navList[3].orderList = res.data;
+						that.productList = res.data;
 						console.log(res.data)
 					},
 					fail: function(res) {
 						console.log(res)
 					}
-				
+
 				});
 			},
-			//swiper 切换
-			changeTab(e) {
-				this.tabCurrentIndex = e.target.current;
-				this.loadData('tabChange');
-			},
-			//顶部tab点击
-			tabClick(index) {
-				this.tabCurrentIndex = index;
-			},
-			//删除订单
-			deleteOrder(index) {
-				uni.showLoading({
-					title: '请稍后'
-				})
-				console.log(index)
+			changeState(Item){
 				var that = this;
 				uni.request({
-					url: 'http://localhost:8080/order/deleteorderbyid?id='+index,
-					method: 'DELETE',
-					// data: {
-					// 	id: index,
-					// },
+					url: 'http://localhost:8080/product/updatestatebyid',
+					method: 'POST',
+					data: {
+						id: Item.id,
+					},
+					header: {
+						'content-type': 'application/x-www-form-urlencoded'
+					},
 					success: function(res) {
 						console.log(res.data)
-						that.loadData()
 					},
 					fail: function(res) {
 						console.log(res)
 					}
 				
 				});
-				// setTimeout(() => {
-				// 	this.navList[this.tabCurrentIndex].orderList.splice(index, 1);
-				// 	uni.hideLoading();
-				// }, 600)
-			},
-			//取消订单
-			cancelOrder(item) {
-				uni.showLoading({
-					title: '请稍后'
-				})
-				console.log(item)
-				this.deleteOrder(item.orderid)
-				uni.hideLoading();
-				// setTimeout(() => {
-				// 	let {
-				// 		stateTip,
-				// 		stateTipColor
-				// 	} = this.orderStateExp(9);
-				// 	item = Object.assign(item, {
-				// 		state: 9,
-				// 		stateTip,
-				// 		stateTipColor
-				// 	})
-
-				// 	//取消订单后删除待付款中该项
-				// 	let list = this.navList[1].orderList;
-				// 	let index = list.findIndex(val => val.id === item.id);
-				// 	index !== -1 && list.splice(index, 1);
-
-				// 	uni.hideLoading();
-				// }, 600)
-			},
-
-			//订单状态文字和颜色
-			orderStateExp(state) {
-				let stateTip = '',
-					stateTipColor = '#fa436a';
-				switch (+state) {
-					case 1:
-						stateTip = '待付款';
-						break;
-					case 2:
-						stateTip = '待发货';
-						break;
-					case 9:
-						stateTip = '订单已关闭';
-						stateTipColor = '#909399';
-						break;
-
-						//更多自定义
-				}
-				return {
-					stateTip,
-					stateTipColor
-				};
 			},
 			navToDetailPage(item) {
-				let id = item.productid;
+				let id = item.id;
 				uni.navigateTo({
 					url: `/pages/product/product?id=${id}`
 				})
@@ -515,7 +324,13 @@
 			}
 		}
 	}
-
+	.offshelf {
+		position: absolute;
+		
+		right: 20px;
+		width: 60px;
+		height: 60px;
+	}
 
 	/* load-more */
 	.uni-load-more {
