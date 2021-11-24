@@ -20,6 +20,13 @@ public class ProductController {
         return productService.GetAllProduct();
     }
 
+    @GetMapping("product/getproduct")
+    @ResponseBody
+    public List<Product> getProduct()
+    {
+        return productService.GetProduct();
+    }
+
     @GetMapping("product/getproductbyid")
     @ResponseBody
     public Product getProductById(Integer id){ return productService.GetProductById(id);}

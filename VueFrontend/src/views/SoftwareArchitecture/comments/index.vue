@@ -110,10 +110,10 @@
 
       <el-table-column
         align="center"
-        label="用户id"
+        label="用户名"
       >
         <template slot-scope="scope">
-          <span style="margin-left: 10px">{{ scope.row.user_id }}</span>
+          <span style="margin-left: 10px">{{ scope.row.user_name }}</span>
         </template>
       </el-table-column>
 
