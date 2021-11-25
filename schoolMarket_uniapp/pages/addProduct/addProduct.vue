@@ -201,8 +201,6 @@
 					sourceType: ['album', 'camera'], //从相册选择或从使用相机
 					success: async (res) => {
 						//上传图片大小限制
-						//console.log(res);
-						//console.log(res.tempFilePaths)
 						if (res.tempFiles[0].size > 10 * 1024 * 1000) { //上传图片大小限制
 							uni.showToast({
 								title: "照片大小不能超过10MB",
@@ -224,16 +222,8 @@
 									'productid': self.goodid //formData是指除了图片以外，额外加的字段
 								},
 								success: (uploadFileRes) => {
-									//这里要注意，uploadFileRes.data是个String类型，要转对象的话需要JSON.parse一下
 									let obj = JSON.parse(uploadFileRes.data);
 									console.log(obj.img_url);
-									//console.log(obj.data);//后端返回数据
-									//self.attachmentId = obj.data.relationId;
-									// let image = {
-									// 	//'id': obj.data.id,
-									// 	//'relationId': obj.data.relationId,
-									// 	'url': res.tempFilePaths[0],
-									// };
 									self.addData.img_url = obj.img_url;
 									self.hasAddImage = true;
 								},
@@ -472,7 +462,6 @@
 		left: 0;
 		right: 0;
 		padding: 30upx 40upx;
-		//background-color: #;
 
 		.subBtn {
 			background: linear-gradient(to right, #ffac30, #fa436a, #ffac30);

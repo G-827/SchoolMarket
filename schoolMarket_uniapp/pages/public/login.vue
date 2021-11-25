@@ -116,28 +116,6 @@
 					}
 
 				})
-				// const {mobile, password} = this;
-				// /* 数据验证模块
-				// if(!this.$api.match({
-				// 	mobile,
-				// 	password
-				// })){
-				// 	this.logining = false;
-				// 	return;
-				// }
-				// */
-				// const sendData = {
-				// 	mobile,
-				// 	password
-				// };
-				// const result = await this.$api.json('userInfo');
-				// if(result.status === 1){
-				// 	this.login(result.data);
-    //                 uni.navigateBack();  
-				// }else{
-				// 	this.$api.msg(result.msg);
-				// 	this.logining = false;
-				// }
 			}
 		},
 

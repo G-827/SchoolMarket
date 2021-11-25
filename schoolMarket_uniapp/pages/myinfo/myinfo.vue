@@ -35,11 +35,6 @@
 					<input :placeholder="userInfo.vxnumber" v-model="userInfo.vxnumber" />
 				</template>
 			</uni-list-item>
-			<!-- <uni-list-item title="学院" :rightText="userInfo.faculty"></uni-list-item>
-			<uni-list-item title="地址" :rightText="userInfo.address"></uni-list-item>
-			<uni-list-item title="QQ号" :rightText="userInfo.qqnumber"></uni-list-item>
-			<uni-list-item title="微信号" :rightText="userInfo.vxnumber"></uni-list-item> -->
-
 		</uni-list>
 		<view class="subPart">
 			<button class="subBtn" form-type="submit" hover-class="subBtnPrs" @click="updateUser">确认修改</button>

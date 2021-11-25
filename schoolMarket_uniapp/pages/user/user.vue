@@ -25,21 +25,6 @@
 		>
 			<image class="arc" src="/static/arc.png"></image>
 			
-			<!-- <view class="tj-sction">
-				<view class="tj-item">
-					<text class="num">128.8</text>
-					<text>余额</text>
-				</view>
-				<view class="tj-item">
-					<text class="num">0</text>
-					<text>优惠券</text>
-				</view>
-				<view class="tj-item">
-					<text class="num">20</text>
-					<text>积分</text>
-				</view>
-			</view> -->
-			<!-- 订单 -->
 			<view class="order-section">
 				<view class="order-item" @click="navTo('/pages/order/order?state=0')" hover-class="common-hover"  :hover-stay-time="50">
 					<text class="yticon icon-shouye"></text>
@@ -155,13 +140,6 @@
 				})  
 			}, 
 	
-			/**
-			 *  会员卡下拉和回弹
-			 *  1.关闭bounce避免ios端下拉冲突
-			 *  2.由于touchmove事件的缺陷（以前做小程序就遇到，比如20跳到40，h5反而好很多），下拉的时候会有掉帧的感觉
-			 *    transition设置0.1秒延迟，让css来过渡这段空窗期
-			 *  3.回弹效果可修改曲线值来调整效果，推荐一个好用的bezier生成工具 http://cubic-bezier.com/
-			 */
 			coverTouchstart(e){
 				if(pageAtTop === false){
 					return;

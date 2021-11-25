@@ -10,10 +10,7 @@
 		</view>
 		<view class="row b-b">
 			<text class="tit">地址</text>
-			<text @click="chooseLocation" class="input">
-				{{addressData.addressName}}
-			</text>
-			<text class="yticon icon-shouhuodizhi"></text>
+			<input class="input" type="text" v-model="addressData.address" placeholder="省市区地址" placeholder-class="placeholder" />
 		</view>
 		<view class="row b-b"> 
 			<text class="tit">门牌号</text>
@@ -35,7 +32,7 @@
 				addressData: {
 					name: '',
 					mobile: '',
-					addressName: '在地图选择',
+					addressName: '',
 					address: '',
 					area: '',
 					default: false

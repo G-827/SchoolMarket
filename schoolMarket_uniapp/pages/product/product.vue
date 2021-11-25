@@ -140,7 +140,7 @@
 			//接收传值,id里面放的是标题，因为测试数据并没写id 
 			let id = options.id;
 			if (id) {
-				this.$api.msg(`点击了${id}`);
+				// this.$api.msg(`点击了${id}`);
 			}
 			this.goodid=id;
 			this.getProductInfo(id);

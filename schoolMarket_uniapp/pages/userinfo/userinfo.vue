@@ -20,10 +20,6 @@
 </template>
 
 <script>
-	// import {  
-	//     mapState,  
-	//     mapMutations  
-	// } from 'vuex';  
 	export default {
 
 		data() {
@@ -38,9 +34,6 @@
 
 			};
 		},
-		// computed:{
-		// 	...mapState(['userInfo']),
-		// },
 		onLoad(options) {
 			let id = options.id;
 			this.getUserInfo(id)

@@ -12,9 +12,6 @@
 				<scroll-view class="list-scroll-content" scroll-y>
 					<!-- @scrolltolower="loadData" -->
 
-					<!-- 空白页 -->
-					<!-- <empty v-if="tabItem.loaded === true && tabItem.orderList.length === 0"></empty> -->
-
 					<!-- 订单列表 " -->
 					<view v-for="(orderItem, orderIndex) in tabItem.orderList" :key="orderIndex" class="order-item">
 						<view class="i-top b-b">
@@ -95,14 +92,6 @@
 			 * 替换onLoad下代码即可
 			 */
 			this.tabCurrentIndex = +options.state;
-			// // #ifndef MP
-			// this.loadData()
-			// // #endif
-			// // #ifdef MP
-			// if (options.state == 0) {
-			// 	this.loadData()
-			// }
-			// // #endif
 			this.loadData()
 
 		},
@@ -240,24 +229,6 @@
 				console.log(item)
 				this.deleteOrder(item.orderid)
 				uni.hideLoading();
-				// setTimeout(() => {
-				// 	let {
-				// 		stateTip,
-				// 		stateTipColor
-				// 	} = this.orderStateExp(9);
-				// 	item = Object.assign(item, {
-				// 		state: 9,
-				// 		stateTip,
-				// 		stateTipColor
-				// 	})
-
-				// 	//取消订单后删除待付款中该项
-				// 	let list = this.navList[1].orderList;
-				// 	let index = list.findIndex(val => val.id === item.id);
-				// 	index !== -1 && list.splice(index, 1);
-
-				// 	uni.hideLoading();
-				// }, 600)
 			},
 
 			//订单状态文字和颜色
@@ -275,8 +246,6 @@
 						stateTip = '订单已关闭';
 						stateTipColor = '#909399';
 						break;
-
-						//更多自定义
 				}
 				return {
 					stateTip,
