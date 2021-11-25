@@ -17,7 +17,7 @@
       width="30%"
     >
       <el-form :model="updateData" :inline="true">
-        <el-form-item label="序号">
+        <el-form-item label="ID">
           <el-input v-model="updateData.id" :disabled="true" size="small" />
         </el-form-item>
         <el-form-item label="商品名">
@@ -74,7 +74,7 @@
       <el-table-column
         align="center"
         prop="id"
-        label="编号"
+        label="ID"
         sortable="custom"
       >
         <template slot-scope="scope">
@@ -113,7 +113,14 @@
           <span style="margin-left: 10px">{{ scope.row.detail }}</span>
         </template>
       </el-table-column>
-
+      <el-table-column
+        align="center"
+        label="图片地址"
+      >
+        <template slot-scope="scope">
+          <span style="margin-left: 10px">{{ scope.row.img_url }}</span>
+        </template>
+      </el-table-column>
       <el-table-column
         align="center"
         label="操作"
@@ -308,11 +315,11 @@ export default {
     SortById() {
       this.sortState = (this.sortState + 1) % 3
       if (this.sortState === 1) {
-        this.tableData.reverse()
+        this.tableData.sort((a, b) => b.id - a.id)
       } else if (this.sortState === 2) {
         this.tableData.reverse()
       }
-      console.log(this.sortState)
+      //console.log(this.sortState)
     }
   }
 }
